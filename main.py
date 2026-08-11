@@ -36,15 +36,27 @@ def get_piece(position):
 
 def square_to_index(square):
     if len(square) != 2:
-        #improve later
-        return False
-    row = square[0]
-    column = square[1]
-    if row not in "abcdefgh" or column not in "12345678":
-        return False
+        raise ValueError("Invalid square")
+
+    file = square[0]
+    rank = square[1]
+
+    if file not in "abcdefgh" or rank not in "12345678":
+        raise ValueError("Invalid square")
+
+    column = ord(file) - ord("a")
+    row = 8 - int(rank)
+    return row * 8 + column
 
 
-
-
-print(square_to_index("f2"))
+def index_to_square(index):
+    if index < 0 or index > 63:
+        raise ValueError("Invalid index")
+    rank = 8 - (index // 8)
+    file = index % 8 + 1
+    letter = chr(file + ord("a") - 1)
+    return letter + str(rank)
+    
+print(square_to_index("c6"))
+print(index_to_square(18))
 
