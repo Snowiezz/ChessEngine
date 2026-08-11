@@ -56,7 +56,20 @@ def index_to_square(index):
     file = index % 8 + 1
     letter = chr(file + ord("a") - 1)
     return letter + str(rank)
-    
+
+
+def board_printer():
+    for row in range(8):
+        rank = 8 - row
+        start = row * 8
+        pieces_in_row = board[start:start + 8]
+        print(rank, " ".join(pieces_in_row))
+    print("  a b c d e f g h")
+
+
+
+
 print(square_to_index("c6"))
 print(index_to_square(18))
+board_printer()
 
