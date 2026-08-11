@@ -67,9 +67,20 @@ def board_printer():
     print("  a b c d e f g h")
 
 
-
-
+def make_move(start,end):
+    start_index = square_to_index(start)
+    end_index = square_to_index(end)
+    piece = get_piece_type(board[start_index])
+    if piece is None:
+        raise ValueError("No piece to move.")
+    if get_piece_type(board[end_index]) is None:
+        board[end_index] = board[start_index]
+        board[start_index] = "."
+        print("Success")
+    
 print(square_to_index("c6"))
 print(index_to_square(18))
+board_printer()
+make_move("e2","e4")
 board_printer()
 
