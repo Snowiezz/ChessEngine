@@ -76,7 +76,7 @@ def make_move(start,end):
     if get_piece_type(board[end_index]) is None:
         board[end_index] = board[start_index]
         board[start_index] = "."
-        print("Success")
+    # do replacing pieces
     
 print(square_to_index("c6"))
 print(index_to_square(18))
