@@ -77,11 +77,9 @@ def make_move(start,end):
         board[end_index] = board[start_index]
         board[start_index] = "."
     else:
-        captured = board[end_index]
         if check_pawn_validity(start,end):
             board[end_index] = board[start_index]
             board[start_index] = "."
-            print("Captured piece:",captured) 
         else:
             print("Invalid move")   
 
@@ -119,12 +117,21 @@ def check_pawn_validity(start,end):
             return True
         return False
     
+def check_knight_validity(start,end):
+    if get_piece_type(board[square_to_index(start)]) != "Knight":
+        return False
+    file_diff = abs(ord(end[0]) - ord(start[0]))
+    rank_diff = abs(int(start[1]) - int(end[1]))
+    if rank_diff == 2 and file_diff == 1:
+        return True
+    elif rank_diff == 1 and file_diff == 2:
+        return True
+    return False
+def check_rook_validity(start,end):
+    if get_piece_type(board[square_to_index(start)]) != "Knight":
+        return False
 
-        
-print(square_to_index("c6"))
-print(index_to_square(18))
+
 board_printer()
 make_move("e2","e4")
 board_printer()
-print(check_pawn_validity("d2","d4"))
-
