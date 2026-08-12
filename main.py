@@ -76,11 +76,55 @@ def make_move(start,end):
     if get_piece_type(board[end_index]) is None:
         board[end_index] = board[start_index]
         board[start_index] = "."
-    # do replacing pieces
+    else:
+        captured = board[end_index]
+        if check_pawn_validity(start,end):
+            board[end_index] = board[start_index]
+            board[start_index] = "."
+            print("Captured piece:",captured) 
+        else:
+            print("Invalid move")   
+
+
+def check_pawn_validity(start,end):
+    colour = get_piece_colour(board[square_to_index(start)])
+    # makes sure it is a pawn
+    if get_piece_type(board[square_to_index(start)]) != "Pawn":
+        return False
+    # cant move left or right
+    if start[0] != end[0]:
+        return False
+    # checks if something is at end
+    if get_piece_type(board[square_to_index(end)]):
+        return False
+    if colour == "White":
+        distance = int(end[1]) - int(start[1])
+        if distance == 2:
+            if get_piece_type(board[square_to_index(end) + 8]):
+                return False
+            if start[1] == "2":
+                return True
+            return False
+        elif distance == 1:
+            return True
+        return False
+    elif colour == "Black":
+        distance = int(start[1]) - int(end[1])
+        if distance == 2:
+            if get_piece_type(board[square_to_index(end) - 8]):
+                return False
+            if start[1] == "7":
+                return True
+        elif distance == 1:
+            return True
+        return False
     
+
+        
 print(square_to_index("c6"))
 print(index_to_square(18))
 board_printer()
 make_move("e2","e4")
 board_printer()
+print(check_pawn_validity("d2","d4"))
 
