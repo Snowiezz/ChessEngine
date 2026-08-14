@@ -120,16 +120,30 @@ def check_pawn_validity(start,end):
 def check_knight_validity(start,end):
     if get_piece_type(board[square_to_index(start)]) != "Knight":
         return False
-    file_diff = abs(ord(end[0]) - ord(start[0]))
-    rank_diff = abs(int(start[1]) - int(end[1]))
+    file_diff = abs(ord(end[0]) - ord(start[0])) # a-h
+    rank_diff = abs(int(start[1]) - int(end[1])) #1-8
     if rank_diff == 2 and file_diff == 1:
         return True
     elif rank_diff == 1 and file_diff == 2:
         return True
     return False
 def check_rook_validity(start,end):
-    if get_piece_type(board[square_to_index(start)]) != "Knight":
+    start_index = square_to_index(start)
+    end_index = square_to_index(end)
+    if start == end:
         return False
+
+    if get_piece_type(board[square_to_index(start)]) != "Rook":
+        return False
+
+
+    if start[0] == end[0]:
+        step = 8 if end_index > start_index
+    
+    file_diff = abs(ord(end[0]) - ord(start[0]))
+    rank_diff = abs(int(start[1]) - int(end[1]))
+
+    
 
 
 board_printer()
